@@ -28,13 +28,14 @@ body {
 }
 
 /* Your existing styles */
-.line1 {
+/* .line1 {
   width: 500px;
   height: 300px;
-  margin-top: -20px;
+  margin-top: -10px;
   margin-left: 35px;
   display: flex;
 }
+
 
 .line2 {
   width: 100%;
@@ -42,7 +43,8 @@ body {
   margin-top: -240px;
   display: flex;
   justify-content: flex-end;
-}
+  margin-right: -100px;
+} */
 
 .l1 {
   font-weight: 700;
@@ -201,17 +203,17 @@ body {
     display: flex;
     justify-content: flex-end;
   }
-  .form{
+  .form {
     /* width: 100px; */
     margin-top: -400px;
     height: 700px;
     /* margin-top: 100px; */
   }
-  .overlay{
-    margin-top:300px ;
+  .overlay {
+    margin-top: 300px;
   }
-.hero{
-  margin-top: 20px;
-  gap: 15px;
-}
+  .hero {
+    margin-top: 20px;
+    gap: 15px;
+  }
 }

@@ -79,7 +79,6 @@ import Logo from "../LOGO.svg";
 //         </button>
 //       </div>
 
-//       {/* Render the code entry modal conditionally */}
 //       <Modal
 //         isOpen={isModalOpen}
 //         onRequestClose={handleModalClose}
@@ -109,14 +108,42 @@ import React, { useState } from "react";
 import { Bars3BottomRightIcon, XMarkIcon } from "@heroicons/react/24/solid";
 
 const Header = () => {
-  let Links = [
-    { name: "HOME", link: "/" },
-    { name: "SERVICE", link: "/" },
-    { name: "ABOUT", link: "/" },
-    { name: "CONTACT", link: "/" },
-  ];
+  // let Links = [
+  //   { name: "Home", link: "/" },
+  //   { name: "Time Table" },
+  //   { name: "Faculty Details", link: "/about" },
+  //   { name: "Contact Us", link: "/about" },
+  // ];
   let [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const [code, setCode] = useState("");
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedLink, setSelectedLink] = useState("");
 
+  const handleLinkClick = (link) => {
+    setModalOpen(true);
+    setSelectedLink(link);
+  };
+
+  const handleCodeSubmit = () => {
+    const isCodeValid = checkCodeValidity(code);
+
+    if (isCodeValid) {
+      setModalOpen(false);
+      navigate(selectedLink);
+    } else {
+      alert("Incorrect code. Please try again.");
+    }
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
+
+  const checkCodeValidity = (code) => {
+    console.log(code);
+    return code === "D<%0" || code === "7@ *";
+  };
   return (
     <div className="shadow-md w-full fixed top-0 left-0 p-1">
       <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-1 rounded-2xl">
@@ -137,27 +164,66 @@ const Header = () => {
             open ? "top-12" : "top-[-490px]"
           }`}
         >
-          {Links.map((link) => (
-            <li className="md:ml-8 md:my-0 my-7 font-semibold">
-              <a
-                href={link.link}
-                className="text-gray-800 hover:text-blue-400 duration-500"
-              >
-                {link.name}
-              </a>
-            </li>
-          ))}
+          <li>
+            <a
+              href="/"
+              className="md:ml-8 md:my-0 my-7 font-semibold cursor-pointer"
+            >
+              Home
+            </a>
+          </li>
+          <li className="md:ml-8 md:my-0 my-7 font-semibold cursor-pointer">
+            <p
+              className="text-gray-800 hover:text-blue-400 duration-500 p-2"
+              onClick={() => handleLinkClick("/viewtables")}
+            >
+              Time Table
+            </p>
+          </li>
+          <li onClick={() => handleLinkClick("/faculty-details")}>
+            <div className="text-black md:ml-8 md:my-0 my-7 font-semibold cursor-pointer">
+              Faculty Details
+            </div>
+          </li>
+          <li>
+            <NavLink
+              to="/about"
+              className="text-black p-2 md:ml-8 md:my-0 my-7 font-semibold cursor-pointer"
+            >
+              Contact Us
+            </NavLink>
+          </li>
+
+          <Modal
+            isOpen={isModalOpen}
+            onRequestClose={handleModalClose}
+            contentLabel="Code Entry Modal"
+            className="popup1"
+            overlayClassName="overlay1"
+          >
+            <div className="code-entry-modal">
+              <h3>Enter Your Code</h3>
+              <input
+                className="codein"
+                type="text"
+                placeholder="Enter code"
+                onChange={(e) => setCode(e.target.value)}
+              />
+              <button className="codebu" onClick={handleCodeSubmit}>
+                Enter
+              </button>
+            </div>
+          </Modal>
           <NavLink to="/contact">
             <button
               className="btn bg-blue-600 text-white md:ml-8 font-semibold px-6 py-2 rounded-xl duration-500 md:static"
               to="/contact"
               style={{ textDecoration: "none", color: "white" }}
             >
-              Sign Up
+              SIGNUP
             </button>
           </NavLink>
         </ul>
-        {/* button */}
       </div>
     </div>
   );

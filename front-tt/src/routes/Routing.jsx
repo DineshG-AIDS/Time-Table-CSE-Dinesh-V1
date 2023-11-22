@@ -18,7 +18,7 @@ export default function Routing() {
         <Route  path="/createtable" element={<CreateTable />} />
         <Route  path="/addfaculties" element={<AddSubject />} />
         <Route path="/faculty-details" element={<FacultyDetails /> } />
-        <Route path="/profiles/:useremail" element={<Profilewa />} />
+        <Route path="/" element={<Profilewa />} />
         <Route path="/viewtables" element={<View/>}/>
       </Routes>
   )
